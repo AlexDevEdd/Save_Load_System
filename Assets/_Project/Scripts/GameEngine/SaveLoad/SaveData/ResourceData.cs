@@ -1,6 +1,6 @@
 using System;
 
-namespace _Project.Scripts.GameEngine.SaveLoad.SaveData
+namespace GameEngine
 {
     [Serializable]
     public struct ResourceData

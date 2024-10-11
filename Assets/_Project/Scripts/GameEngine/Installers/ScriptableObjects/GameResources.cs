@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace _Project.Scripts.GameEngine.Installers.ScriptableObjects
+namespace GameEngine
 {
     [Serializable]
     public class GameResources
     {
-        [SerializeField] private List<Sprite> _icons;
+        [SerializeField]
+        private List<Sprite> _icons;
         
         public bool TryGetSprite(string key, out Sprite sprite)
         {

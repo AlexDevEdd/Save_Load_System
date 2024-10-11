@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace _Project.Scripts.GameEngine.SaveLoad.SaveData
+namespace GameEngine
 {
     [Serializable]
     public class ResourcesData

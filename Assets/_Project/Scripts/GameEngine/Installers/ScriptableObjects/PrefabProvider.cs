@@ -1,11 +1,9 @@
 using System;
-using _Project.Scripts.GameEngine.Systems.Units;
-using _Project.Scripts.Tools;
-using _Project.Scripts.Tools.Serialize;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Utils;
 
-namespace _Project.Scripts.GameEngine.Installers.ScriptableObjects
+namespace GameEngine
 {
     [Serializable]
     public class PrefabProvider

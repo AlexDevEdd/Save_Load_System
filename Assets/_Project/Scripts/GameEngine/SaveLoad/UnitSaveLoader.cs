@@ -1,16 +1,15 @@
 using System.Linq;
-using _Project.Scripts.GameEngine.SaveLoad.SaveData;
-using _Project.Scripts.GameEngine.Systems.Units;
-using _Project.Scripts.SaveSystem;
+using JetBrains.Annotations;
+using SaveLoad;
 using Zenject;
 
-namespace _Project.Scripts.GameEngine.SaveLoad
+namespace GameEngine
 {
+    [UsedImplicitly]
     public class UnitSaveLoader : SaveLoader<UnitsData, UnitSystem>
     {
-        [Inject]
-        public UnitSaveLoader(GameRepository repository, UnitSystem system)
-            : base(repository, system) { }
+        public UnitSaveLoader(GameDataStorage dataStorage, UnitSystem system)
+            : base(dataStorage, system) { }
         
         protected override UnitsData ConvertToData(UnitSystem system)
         {

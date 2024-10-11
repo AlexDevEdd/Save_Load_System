@@ -1,28 +1,30 @@
-using _Project.Scripts.GameEngine.Systems.Units;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.GameEngine.Installers
+namespace GameEngine
 {
-    public class UnitsInstaller
+    public class UnitsInstaller : MonoInstaller
     {
-        public UnitsInstaller(DiContainer container, Transform unitContainer)
-        {
-            BindUnitSystem(container, unitContainer);
-            BindUnitFactory(container);
-        }
+        [SerializeField] 
+        private Transform _unitContainer;
 
-        private void BindUnitSystem(DiContainer container, Transform unitContainer)
+        public override void InstallBindings()
         {
-            container.BindInterfacesAndSelfTo<UnitSystem>()
+            BindUnitSystem();
+            BindUnitFactory();
+        }
+        
+        private void BindUnitSystem()
+        {
+            Container.BindInterfacesAndSelfTo<UnitSystem>()
                 .AsSingle()
-                .WithArguments(unitContainer)
+                .WithArguments(_unitContainer)
                 .NonLazy();
         }
 
-        private void BindUnitFactory(DiContainer container)
+        private void BindUnitFactory()
         {
-            container.Bind<UnitFactory>()
+            Container.Bind<UnitFactory>()
                 .AsSingle()
                 .NonLazy();
         }

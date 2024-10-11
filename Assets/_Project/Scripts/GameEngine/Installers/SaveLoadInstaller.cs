@@ -1,43 +1,47 @@
-using _Project.Scripts.GameEngine.SaveLoad;
-using _Project.Scripts.SaveSystem;
+using SaveLoad;
+using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.GameEngine.Installers
+namespace GameEngine
 {
-    public class SaveLoadInstaller
+    public class SaveLoadInstaller : MonoInstaller
     {
-        public SaveLoadInstaller(DiContainer container)
-        {
-            BindSaveSystem(container);
-            BindGameRepository(container);
-            BindUnitSaveLoader(container);
-            BindResourceSaveLoader(container);
-        }
+        [SerializeField]
+        private string _saveKey;
 
-        private void BindSaveSystem(DiContainer container)
+        public override void InstallBindings()
         {
-            container.BindInterfacesAndSelfTo<SaveLoadSystem>()
+            BindSaveSystem();
+            BindGameRepository();
+            BindUnitSaveLoader();
+            BindResourceSaveLoader();
+        }
+        
+        private void BindSaveSystem()
+        {
+            Container.BindInterfacesAndSelfTo<SaveLoadSystem>()
                 .AsSingle()
                 .NonLazy();
         }
 
-        private void BindGameRepository(DiContainer container)
+        private void BindGameRepository()
         {
-            container.BindInterfacesAndSelfTo<GameRepository>()
+            Container.Bind<GameDataStorage>()
+                .AsSingle()
+                .WithArguments(_saveKey)
+                .NonLazy();
+        }
+
+        private void BindUnitSaveLoader()
+        {
+            Container.BindInterfacesAndSelfTo<UnitSaveLoader>()
                 .AsSingle()
                 .NonLazy();
         }
 
-        private void BindUnitSaveLoader(DiContainer container)
+        private void BindResourceSaveLoader()
         {
-            container.BindInterfacesAndSelfTo<UnitSaveLoader>()
-                .AsSingle()
-                .NonLazy();
-        }
-
-        private void BindResourceSaveLoader(DiContainer container)
-        {
-            container.BindInterfacesAndSelfTo<ResourceSaveLoader>()
+            Container.BindInterfacesAndSelfTo<ResourceSaveLoader>()
                 .AsSingle()
                 .NonLazy();
         }

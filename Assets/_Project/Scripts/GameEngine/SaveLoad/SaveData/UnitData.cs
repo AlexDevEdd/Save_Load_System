@@ -1,8 +1,7 @@
 using System;
-using _Project.Scripts.GameEngine.Systems.Units;
-using _Project.Scripts.Tools.Serialize;
+using Utils;
 
-namespace _Project.Scripts.GameEngine.SaveLoad.SaveData
+namespace GameEngine
 {
     [Serializable]
     public struct UnitData

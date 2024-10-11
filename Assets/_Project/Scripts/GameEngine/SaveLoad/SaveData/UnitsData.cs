@@ -1,16 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
-namespace _Project.Scripts.GameEngine.SaveLoad.SaveData
+namespace GameEngine
 {
     [Serializable]
     public class UnitsData
     {
-        public List<UnitData> Units;
-
-        public UnitsData()
-        {
-            Units = new List<UnitData>();
-        }
+        [JsonProperty("units")]
+        public List<UnitData> Units = new();
     }
 }

@@ -1,16 +1,14 @@
 using System.Linq;
-using _Project.Scripts.GameEngine.SaveLoad.SaveData;
-using _Project.Scripts.GameEngine.Systems.GameResources;
-using _Project.Scripts.SaveSystem;
-using Zenject;
+using JetBrains.Annotations;
+using SaveLoad;
 
-namespace _Project.Scripts.GameEngine.SaveLoad
+namespace GameEngine
 {
+    [UsedImplicitly]
     public class ResourceSaveLoader : SaveLoader<ResourcesData, ResourceSystem>
     {
-        [Inject]
-        public ResourceSaveLoader(GameRepository repository, ResourceSystem system)
-            : base(repository, system) { }
+        public ResourceSaveLoader(GameDataStorage dataStorage, ResourceSystem system)
+            : base(dataStorage, system) { }
         
         protected override ResourcesData ConvertToData(ResourceSystem system)
         {
@@ -19,7 +17,7 @@ namespace _Project.Scripts.GameEngine.SaveLoad
             {
                 var data = new ResourceData()
                 {
-                    ID = resource.ID,
+                    ID = resource.Id,
                     Amount = resource.Amount
                 };
 
@@ -36,7 +34,7 @@ namespace _Project.Scripts.GameEngine.SaveLoad
             var resources = system.GetResources().ToList();
 
             for (var index = 0; index < resources.Count; index++)
-                resources[index].Amount = data.ResourceDatas[index].Amount;
+                resources[index].SetUpAmount(data.ResourceDatas[index].Amount);
         }
     }
 }

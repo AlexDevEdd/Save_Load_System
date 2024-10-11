@@ -1,7 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 
-namespace _Project.Scripts.GameEngine.Installers.ScriptableObjects
+namespace GameEngine
 {
     [Serializable]
     public class GameBalance
